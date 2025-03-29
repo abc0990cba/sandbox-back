@@ -15,12 +15,6 @@ export class GoogleOauthStrategy extends PassportStrategy(Strategy, 'google') {
     });
   }
 
-  // authorizationParams(): { [key: string]: string } {
-  //   return {
-  //     prompt: 'consent',
-  //   };
-  // }
-
   // eslint-disable-next-line @typescript-eslint/require-await
   async validate(
     accessToken: string,
@@ -28,15 +22,15 @@ export class GoogleOauthStrategy extends PassportStrategy(Strategy, 'google') {
     profile: Profile,
     done: VerifyCallback,
   ): Promise<any> {
-    const { name, emails, photos } = profile;
-    const user = {
-      email: emails?.[0].value,
-      firstName: name?.givenName,
-      lastName: name?.familyName,
-      picture: photos?.[0].value,
-      accessToken,
-      refreshToken,
-    };
+    // const { name, emails, photos } = profile;
+    // const user = {
+    //   email: emails?.[0].value,
+    //   firstName: name?.givenName,
+    //   lastName: name?.familyName,
+    //   picture: photos?.[0].value,
+    //   accessToken,
+    //   refreshToken,
+    // };
     done(null, profile);
   }
 }

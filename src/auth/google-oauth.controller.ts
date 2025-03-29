@@ -23,7 +23,9 @@ export class GoogleOauthController {
     const { accessToken } = this.jwtAuthService.login(req.user);
     res.cookie('jwt', accessToken, {
       httpOnly: true,
-      sameSite: 'lax',
+      // sameSite: 'lax',
+      sameSite: 'none',
+      secure: true,
     });
 
     return req.user;
