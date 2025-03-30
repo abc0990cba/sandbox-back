@@ -3,10 +3,14 @@ import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthService } from 'src/auth/jwt-auth.service';
 import { Response, Request } from 'express';
 import { GoogleOauthGuard } from './google-oauth.guard';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('auth/google')
 export class GoogleOauthController {
-  constructor(private jwtAuthService: JwtAuthService) {}
+  constructor(
+    private jwtAuthService: JwtAuthService,
+    private readonly configService: ConfigService,
+  ) {}
 
   @Get()
   @UseGuards(GoogleOauthGuard)
@@ -28,8 +32,7 @@ export class GoogleOauthController {
       secure: true,
     });
 
-    res.redirect('https://sandbox-front.vercel.app/');
-    // res.redirect('http://localhost:3001/');
+    res.redirect(this.configService.get<string>('FRONTEND_URL') || '/');
     // return req.user;
   }
 }
