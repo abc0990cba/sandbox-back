@@ -28,6 +28,8 @@ export class GoogleOauthController {
       secure: true,
     });
 
-    return req.user;
+    res.redirect('https://sandbox-front.vercel.app/');
+    // res.redirect('http://localhost:3001/');
+    // return req.user;
   }
 }
